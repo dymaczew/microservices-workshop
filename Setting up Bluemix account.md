@@ -1,9 +1,9 @@
-In order to complete the exercises in this workshop the working Bluemix and GitHub accounts are needed. If you don't have them, please sign up using the following steps. In other case please go to lab 1 "Creating microservice for the database integration"
-
-#Setting up Bluemix account  
+#Setting up required accounts  
+In order to complete the exercises in this workshop the working Bluemix and GitHub accounts are needed. If you don't have them, please sign up using the following steps. In other case please go to lab 1 "Creating microservice for the database integration"  
+ 
 Bluemix Trial account is completely free for 30 days and **DOES NOT** require you to provide any payment information or credit card number.
 For registration you only need a working email address and phone number.  
-IMPORTANT: To complete registration you have to check your email so select the address that you can access imediately.
+IMPORTANT: To complete registration you have to check your email so select the address that you can access imediately.  
 
 ---
 ##Create Bluemix account  
@@ -14,10 +14,10 @@ IMPORTANT: To complete registration you have to check your email so select the a
 5. Upon login for the first time you have to accept Terms & Conditions of the Bluemix cloud. Click 'Contine'
 
 ##Creating the organization and space  
-6. Select 'US South' as prefered region and provide organization name of your choice. Org name must be unique - if the system does not accept you choice try different one (e.g. add -\<username\>)
-7. Provide the name for the first development space for example 'dev'. Development spaces are like projects. You can manage later the spaces in your account preference page.
-8. On the Summary dialog click "I'm Ready" button.
-9. If you wish explore the Dashboard, available services and documentation.
+1. Select 'US South' as prefered region and provide organization name of your choice. Org name must be unique - if the system does not accept you choice try different one (e.g. add -\<username\>)
+2. Provide the name for the first development space for example 'dev'. Development spaces are like projects. You can manage later the spaces in your account preference page.
+3. On the Summary dialog click "I'm Ready" button.
+4. If you wish explore the Dashboard, available services and documentation.
 
 ##Creating the GitHub account  
 In order to manage source code in you project you need code repository. Currently IBM Bluemix uses GitHub so you need a working Github account. If you don't have it please sign up with the following procedure
