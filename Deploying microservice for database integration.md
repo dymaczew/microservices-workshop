@@ -1,9 +1,10 @@
 # Deploying microservice for database integration
 
-In the first excerices you will deploy microservice written in Java using [Spring Cloud framework](http://projects.spring.io/spring-cloud/)  
+In the first excerices you will deploy microservice written in Java with [Spring Cloud framework](http://projects.spring.io/spring-cloud/)  
 The microservice exposes data from the database over HTTP (translates HTTP GET request into proper SQL query and returns data)  
 
-MySQL database was already provisioned for you and is available under 169.46.17.190. Inside there is sample inventory database that contains informations about some items
+MySQL database was already provisioned for you and it is available under 169.46.17.190  
+Inside the database, there is a sample inventory db that contains tables with informations about 'items'.
 
 Microservices can be developed using different programing languages and can run on almost any platform. In this example we will use the microservice written in Java running in Docker container.
 
@@ -33,8 +34,12 @@ Now you will define DevOps pipeline - a process that automates building and depl
 5. Select github from available pallette. 
 ![github](resources/003-select-github-integration.png)  
 6. If you haven't done it before you have to connect Bluemix wit Github. Provide the name and password for your github account. Click on the "Authorize" button and refresh the page
-7. On "Configure the Integration" screen select 
-    Repository type: Clone. 
-    Provide new name, for example `micro-inventory-\<username\>`. 
-    Provice the source path https://github.com/dymaczew/micro-inventory-docker.git
+7. On "Configure the Integration" screen select  
+    Repository type: Clone.  
+    Provide new  repository name, for example `micro-inventory-\<username\>`.  
+    Provice the source path https://github.com/dymaczew/micro-inventory-docker.git  
+![micro-inventory-docker](resources/004-details-of-github-integration.png)
+8. Click `Create integration`
+
+
     
