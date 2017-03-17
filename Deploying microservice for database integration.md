@@ -21,7 +21,7 @@ To start deploying Docker containers in Bluemix you have to create a namespace i
   1. Login to Bluemix console
   2. Click "Catalog" in the top right part of the screen. Then select "Containers" under Apps menu on the left. Try to create any new container clicking on the name (for example "ibm-backup-restore").  
 
-![] (resources/002-select-container.png)  
+![select image] (resources/002-select-container.png)  
 
   3. A "Set registry namespace" dialog pops up. Provide a name of your choice and click "Save". When the namespace is created, you can go back to the dashboard and continue with the exercise
 
