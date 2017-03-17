@@ -1,5 +1,5 @@
 # Setting up required accounts  
-In order to complete the exercises in this workshop the working Bluemix and GitHub accounts are needed. If you don't have them, please sign up using the following steps. In other case please go to lab 1 ["Creating microservice for the database integration"](Creating microservice for the database integration.md)  
+In order to complete the exercises in this workshop the working Bluemix and GitHub accounts are needed. If you don't have them, please sign up using the following steps. In other case please go to lab 1 ["Deploying microservice for the database integration"](Deploying microservice for the database integration.md)  
  
 Bluemix Trial account is completely free for 30 days and **DOES NOT** require you to provide any payment information or credit card number.
 For registration you only need a working email address and phone number.  
@@ -26,4 +26,4 @@ In order to manage source code in you project you need code repository. Currentl
 3. Leave the default free plan selected in Step 2 and click "Continue"
 4. Provide whatever answers you like in Step 3 and click "Submit"
 
-You are all set now. Go to the lab 1 ["Creating microservice for the database integration"](Creating microservice for the database integration.md)
+You are all set now. Go to the lab 1 ["Deploying microservice for the database integration"](Deploying\ microservice\ for\ database\ integration.md )
