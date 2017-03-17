@@ -28,3 +28,13 @@ To start deploying Docker containers in Bluemix you have to create a namespace i
 Now you will define DevOps pipeline - a process that automates building and deploying your microservice whenever source code is changed.
 1. From the top left menu select "Service" and "DevOps". Then click "Create DevOps Service" button.
 2. Select "Continuous Delivery" service from available services. Review payment plan (Should be 'Free') and click 'Create'.
+3. On the "Get started with Continuous Delivery" select "Start from a toolchain template". Scroll down and then select "Build your own toolchain" in "Other toolchains" category. Provide the name for the toolchain
+4. Click on "Add a Tool"
+5. Select github from available pallette. 
+![github](resources/003-select-github-integration.png)  
+6. If you haven't done it before you have to connect Bluemix wit Github. Provide the name and password for your github account. Click on the "Authorize" button and refresh the page
+7. On "Configure the Integration" screen select 
+    Repository type: Clone. 
+    Provide new name, for example `micro-inventory-\<username\>`. 
+    Provice the source path https://github.com/dymaczew/micro-inventory-docker.git
+    
