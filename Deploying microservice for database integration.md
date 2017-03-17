@@ -49,7 +49,7 @@ Now you will define DevOps service - a process that automates building and deplo
 4. Click on "Add a Tool"
 5. Select github from available pallette. 
 ![github](resources/003-select-github-integration.png)  
-6. If you haven't done it before you have to connect Bluemix wit Github. Provide the name and password for your github account. Click on the "Authorize" button and refresh the page
+6. If you haven't done it before you have to connect Bluemix with Github. Provide the name and password for your github account. Click on the "Authorize" button and refresh the page
 7. On "Configure the Integration" screen select  
     Repository type: Clone.  
     Provide new  repository name, for example `micro-inventory-\<username\>`.  
@@ -59,5 +59,39 @@ Now you will define DevOps service - a process that automates building and deplo
 
 ### Adding Delivery Pipeline to the toolchain
 
-1. As a second tool in your toolchain you will add 
-    
+As a second tool in your toolchain you will add Delivery Pipeline. This tool helps you define sequence of task that has to happen for the service to be deployed. In our case you will define two stages - building the Docker image and deploying it to IBM Container Service on Bluemix.
+
+1. Click on `Add a Tool` again and select `Delivery Pipeline`
+2. Provide the name
+3. Click on the `Delivery Pipeline` icon to edit the pipeline
+4. Click `Add Stage`
+5. Click on the MyStage name and change it to `Build container`
+6. Input tab should be already prepopulated with your git repository
+7. Select Jobs tab and click `Add Job` of type Build
+8. Select Build type of `IBM Container Service`, accept default org and space, provide the image name (e.g. micro-inventory)
+9. Review default build script and click `Save`
+10. Run the stage to verify the configuration. 
+
+The image build process takes some time (~15 minuts?) - you may continue with defining next stages of the pipeline and see the result later.
+
+If the Build phase is successful you should have one image stored in your registry. Go to Apps, Containers and click `Create Containers`  
+Wait unlil the page shows custom images pulled from user registry (there is a running circle in the top right corner). When it's gone you should see your image available on the bottom of the screen
+
+11. Click `Add Stage`
+12. Click on the MyStage name and change it to `Deploy container`
+13. Input tab should be already prepopulated with results of previous stage
+14. Select Jobs tab and click `Add Job` of type Deploy
+15. Select Deployer Type: `IBM Containers on Bluemix`. Accept default values for Target, Organization, Space and Deployment Strategy
+16. Provide the unique name (for example micro-inventory-\<username\>). Leave port value 80
+17. Because we need the containers to communicate between public endpoints (Netflix components as well as MySQL are deployed on other account) you have to deploy container as a group with public route (domain name accesible from Internet). To do this edit the deployment script and comment line  
+      #/bin/bash deployscripts/deploycontainer.sh  
+and uncomment line
+      /bin/bash deployscripts/deploygroup.sh
+18. Provice Optional deployment arguments `-e eureka.instance.preferIpAddress=false -e eureka.instance.hostname=<your container name from step 16>.mybluemix.net`  
+This additional environment variables instruct Spring Cloud framework to register the service in Eureka using provided hostname
+19. On the environment tab add the following Text variables (change the names to match your environment):
+![env-variables](resources/007-deploy-env-properties.png)
+20. Click `Save`. The deployment should be triggered automatically after the build phase is completed.
+
+
+
