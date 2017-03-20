@@ -1,10 +1,10 @@
 # Deploying microservice for database integration
 
-In the first excerices you will deploy microservice written in Java with [Spring Cloud framework](http://projects.spring.io/spring-cloud/)  
+In the first exerices you will deploy microservice written in Java with [Spring Cloud framework](http://projects.spring.io/spring-cloud/)  
 The microservice exposes data from the database over HTTP (translates HTTP GET request into proper SQL query and returns data)  
 
 MySQL database was already provisioned for you and it is available under 169.46.17.190  
-Inside the database, there is a sample inventory db that contains tables with informations about 'items'.
+Inside the database, there is a sample inventory db that contains tables with information about 'items'.
 
 Microservices can be developed using different programing languages and can run on almost any platform. In this example we will use the microservice written in Java running in Docker container.
 
@@ -20,13 +20,15 @@ Take a look at the application source code
 1. Open the file [Application.java](https://github.com/dymaczew/cloudnative-micro-inventory-dymaczew/blob/master/src/main/java/inventory/mysql/Application.java). You will notice the following lines:  
 ![application-source-code](resources/005-application1-source-code.png)
 
-The lines marked in red are responsible for initiating the Spring Cloud framework in the application, registering the microservice in Eureka registry and enabling circuit breaker (Hysterix)
+The lines marked in red are responsible for initiating the Spring Cloud framework in the application, registering the microservice in Eureka registry and enabling circuit breaker (Hystrix)
 
 2. Open the configuration file for Spring Cloud framework [here](https://github.com/dymaczew/cloudnative-micro-inventory-dymaczew/blob/master/src/main/resources/application.yml)  
 The file contains externalized variables used by the framework - such as location of Eureka service or database to which application should connect.  
-The values from the file can be overriden with environment variables at the runtime.
+The values from the file can be overridden with environment variables at the runtime.
 
 For you convenience application is already compiled and you will use git repository containing app.jar as well as corresponding Dockerfile [here](https://github.com/dymaczew/micro-inventory-docker.git)
+
+Dockerfile is an instruction for Docker how to build a container image. You can view the content of the Dockerfile for the lab [here](https://github.com/dymaczew/micro-inventory-docker/blob/master/Dockerfile)
 
 ## Deploying Docker container
 To start deploying Docker containers in Bluemix you have to create a namespace in docker registry hosted on Bluemix. This namespace will identify your images and containers
@@ -47,13 +49,14 @@ Now you will define DevOps service - a process that automates building and deplo
 
 ### Adding GitHub integration to the toolchain
 4. Click on "Add a Tool"
-5. Select github from available pallette. 
+5. Select github from available palette. 
 ![github](resources/003-select-github-integration.png)  
-6. If you haven't done it before you have to connect Bluemix with Github. Provide the name and password for your github account. Click on the "Authorize" button and refresh the page
-7. On "Configure the Integration" screen select  
+6. If you haven't done it before, you have to connect Bluemix with Github.  Click on the "Authorize" button, provide  GitHub username and password and clikc on `Authorize application` button on the next screen.
+![authorize-github](resources/009-authorize-github-access.png)
+7. When finished with authorization, on the "Configure the Integration" screen select  
     Repository type: Clone.  
     Provide new  repository name, for example `micro-inventory-\<username\>`.  
-    Provice the source path https://github.com/dymaczew/micro-inventory-docker.git  
+    Provide the source path https://github.com/dymaczew/micro-inventory-docker.git  
 ![micro-inventory-docker](resources/004-details-of-github-integration.png)
 8. Click `Create integration`
 
@@ -72,7 +75,7 @@ As a second tool in your toolchain you will add Delivery Pipeline. This tool hel
 9. Review default build script and click `Save`
 10. Run the stage to verify the configuration. 
 
-The image build process takes some time (~15 minuts?) - you may continue with defining next stages of the pipeline and see the result later.
+The image build process takes some time (~10 minutes) - you may continue with defining next stages of the pipeline and see the result later.
 
 If the Build phase is successful you should have one image stored in your registry. Go to Apps, Containers and click `Create Containers`  
 Wait unlil the page shows custom images pulled from user registry (there is a running circle in the top right corner). When it's gone you should see your image available on the bottom of the screen
@@ -83,7 +86,7 @@ Wait unlil the page shows custom images pulled from user registry (there is a ru
 14. Select Jobs tab and click `Add Job` of type Deploy
 15. Select Deployer Type: `IBM Containers on Bluemix`. Accept default values for Target, Organization, Space and Deployment Strategy
 16. Provide the unique name (for example micro-inventory-\<username\>). Leave port value 80
-17. Because we need the containers to communicate between public endpoints (Netflix components as well as MySQL are deployed on other account) you have to deploy container as a group with public route (domain name accesible from Internet). To do this edit the deployment script and comment line  
+17. Because we need the containers to communicate between public endpoints (Netflix components as well as MySQL are deployed on other account) you have to deploy container as a group with public route (domain name accessible from Internet). To do this edit the deployment script and comment line  
       #/bin/bash deployscripts/deploycontainer.sh  
 and uncomment line
       /bin/bash deployscripts/deploygroup.sh
@@ -91,7 +94,22 @@ and uncomment line
 This additional environment variables instruct Spring Cloud framework to register the service in Eureka using provided hostname
 19. On the environment tab add the following Text variables (change the names to match your environment):
 ![env-variables](resources/007-deploy-env-properties.png)
-20. Click `Save`. The deployment should be triggered automatically after the build phase is completed.
+20. Click `Save`. The deployment should be triggered automatically after the build phase is completed. If not, click on the 'Run stage' button.
+
+## Verification of the deployment
+If everything works as expected you should have your first microservice deployed on IBM Bluemix as Docker container. You can review the Log of the deployment in the Deployment Pipeline (Click on `View logs and history` link on the Deploy stage)
+![deployment-logs](resources/010-pipeline-logs.png)
+
+Verify that the service is available opening the following URL with your browser:  
+  `http://micro-inventory-<username>.mybluemix.net/micro/inventory/13401`
+
+In a response you should get JSON string containing the data from MySQL database  
+`{"id":13401,"name":"Dayton Meat Chopper","description":"Punched-card tabulating machines and time clocks were not the only products offered by the young IBM. Seen here in 1930, manufacturing employees of IBM's Dayton Scale Company are assembling Dayton Safety Electric Meat Choppers. These devices, which won the Gold Medal at the 1926 Sesquicentennial International Exposition in Philadelphia, were produced in both counter base and pedestal styles (5000 and 6000 series, respectively). They included one-quarter horsepower models, one-third horsepower machines (Styles 5113, 6113F and 6213F), one-half horsepower types (Styles 5117, 6117F and 6217F) and one horsepower choppers (Styles 5128, 6128F and 6228F). Prices in 1926 varied from  to . Three years after this photograph was taken, the Dayton Scale Company became an IBM division, and was sold to the Hobart Manufacturing Company in 1934.","price":4599,"img":"api/image/meat-chopper.jpg","imgAlt":"Dayton Meat Chopper"}`
+
+Verify also that your microservice successfully registered in Eureka. Goto [Eureka](http://netflix-eureka-dymaczew.mybluemix.net/) page and check the inventory-microservice line - it should contain the address of your instance
+![eureka-status](resources/011-eureka-status.png)
+  
+This concludes this exercise. Take a break and go to the next lab [Deploying frontend support microservice](Deploying\ frontend\ support\ microservice.md)
 
 
 
