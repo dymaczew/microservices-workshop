@@ -1,9 +1,9 @@
 # microservices-workshop
 
-This site contains lab guide to excercises based on <a href=https://github.com/ibm-cloud-architecture/refarch-cloudnative>IBM Cloudnative Reference Architecture app</a>
+This site contains lab guides to exercises based on <a href=https://github.com/ibm-cloud-architecture/refarch-cloudnative>IBM Cloudnative Reference Architecture app</a>
 
-In order to complete the labs and deploy sample web application based on microservices architecture complete the following excercises:
-1. Setting up required accounts
-2. Deploying micro-inventory service
-3. Deploying bff (backend for frontend) service for micro-inventory
-4. (Optional) Creating a deployment pipeline
+In order to complete the labs and deploy sample microservices complete the following excercises:
+1. [Setting up required accounts](Setting\ up\ Bluemix\ account.md)
+2. [Deploying microservice for database integration](Deploying\ microservice\ for\ database\ integration.md)
+3. [Deploying bff (backend for frontend) service for micro-inventory](Deploying\ frontend\ support\ microservice.md)
+
