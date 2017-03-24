@@ -109,7 +109,7 @@ In a response you should get JSON string containing the data from MySQL database
 Verify also that your microservice successfully registered in Eureka. Goto [Eureka](http://netflix-eureka-dymaczew.mybluemix.net/) page and check the inventory-microservice line - it should contain the address of your instance
 ![eureka-status](resources/011-eureka-status.png)
   
-This concludes this exercise. Take a break and go to the next lab [Deploying frontend support microservice](Deploying\ frontend\ support\ microservice.md)
+This concludes this exercise. Take a break and go to the next lab [Deploying frontend support microservice](/Deploying\ frontend\ support\ microservice.md)
 
 
 
